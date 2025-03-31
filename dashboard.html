@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Environmental Impact Dashboard</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #27ae60;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background-color: #f5f6fa;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            grid-column: 1 / -1;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .metric-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .visualization {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .recommendations {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .chart-placeholder {
+            height: 400px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #7f8c8d;
+        }
+
+        .data-update {
+            text-align: center;
+            color: #7f8c8d;
+            margin-top: 1rem;
+        }
+
+        .dashboard-error {
+            background: #ffe8e8;
+            border: 2px solid #ff4444;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+        }
+        
+        .dashboard-error h3 {
+            color: #ff4444;
+            margin-bottom: 0.5rem;
+        }
+        
+        .dashboard-error p {
+            margin: 0.5rem 0;
+        }
+        
+        /* Loading indicator styles */
+        .loading-indicator {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-left-color: var(--secondary-color);
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
+        }
+        
+        .analysis-status {
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+            margin-top: 0.5rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="header">
+            <h1>Environmental Impact Dashboard</h1>
+            <p>Last updated: <span id="update-time">Loading...</span></p>
+        </div>
+
+        <main>
+            <section class="metrics-grid">
+                <div class="metric-card">
+                    <h3>Water Quality Index</h3>
+                    <div class="metric-value" id="water-quality">--</div>
+                </div>
+                <div class="metric-card">
+                    <h3>Mineral Extraction Rate</h3>
+                    <div class="metric-value" id="mineral-rate">--</div>
+                </div>
+                <div class="metric-card">
+                    <h3>Timber Production</h3>
+                    <div class="metric-value" id="timber-production">--</div>
+                </div>
+            </section>
+
+            <section class="visualization">
+                <h2>Pollution Trends</h2>
+                <div class="chart-placeholder" id="chart-area">
+                    <canvas id="pollution-trend-chart" width="400" height="200"></canvas>
+                    <div id="no-trend-data" style="display: none; text-align: center; padding: 20px;">
+                        <p>No trend data available</p>
+                    </div>
+                </div>
+                <div class="loading-indicator" id="chart-loading" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Analyzing environmental data...</p>
+                    <div class="analysis-status" id="analysis-status">Initializing analysis</div>
+                </div>
+            </section>
+        </main>
+
+        <aside class="recommendations">
+            <h2>AI Recommendations</h2>
+            <div id="recommendations-list">
+                <p>Loading insights...</p>
+            </div>
+            <div class="loading-indicator" id="recommendations-loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>Generating recommendations...</p>
+                <div class="analysis-status" id="recommendations-status">Processing data</div>
+            </div>
+        </aside>
+    </div>
+
+    <div class="data-update">
+        Data sourced from Malaysian Government APIs
+    </div>
+
+    <!-- Include Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        // Mock data structure matching backend format
+        const mockData = {
+            "Water Pollution": {
+                "quality_index": 84,
+                "trends": [{"month": "Jan", "value": 80}, {"month": "Feb", "value": 82}, {"month": "Mar", "value": 85}, {"month": "Apr", "value": 83}, {"month": "May", "value": 87}, {"month": "Jun", "value": 90}]
+            },
+            "Mineral Extraction": {
+                "extraction_rate": "15.2 tons/day",
+                "impact_score": 7.8
+            },
+            "Timber Production": {
+                "production_volume": "1200 m³",
+                "sustainability_index": 92
+            }
+        };
+
+        // Show/hide loading indicators
+        function setLoadingState(isLoading, analysisStage = '') {
+            const chartLoading = document.getElementById('chart-loading');
+            const chartArea = document.getElementById('chart-area');
+            const recommendationsLoading = document.getElementById('recommendations-loading');
+            const recommendationsList = document.getElementById('recommendations-list');
+            const analysisStatus = document.getElementById('analysis-status');
+            const recommendationsStatus = document.getElementById('recommendations-status');
+            
+            if (isLoading) {
+                // Show loading indicators
+                chartLoading.style.display = 'flex';
+                chartArea.style.opacity = '0.3';
+                recommendationsLoading.style.display = 'flex';
+                recommendationsList.style.opacity = '0.3';
+                
+                // Update status messages
+                if (analysisStage) {
+                    const stages = [
+                        'Fetching data from sources',
+                        'Processing environmental metrics',
+                        'Analyzing pollution trends',
+                        'Calculating impact scores',
+                        'Generating recommendations'
+                    ];
+                    
+                    // Simulate different stages of analysis
+                    const stageIndex = Math.min(Math.floor(analysisStage * stages.length), stages.length - 1);
+                    analysisStatus.textContent = stages[stageIndex];
+                    recommendationsStatus.textContent = stageIndex >= 4 ? 
+                        'Finalizing recommendations' : 'Waiting for analysis completion';
+                }
+            } else {
+                // Hide loading indicators
+                chartLoading.style.display = 'none';
+                chartArea.style.opacity = '1';
+                recommendationsLoading.style.display = 'none';
+                recommendationsList.style.opacity = '1';
+            }
+        }
+        
+        // Enhanced data loading with error handling
+        function loadDashboardData() {
+            try {
+                // Show loading state
+                setLoadingState(true, 0);
+                
+                // Simulate API call
+                const response = fetch('/api/data')
+                    .then(response => {
+                        setLoadingState(true, 0.2); // Update loading stage
+                        if (!response.ok) throw new Error(`Network error: ${response.status}`);
+                        return response.json();
+                    })
+                    .then(data => {
+                        setLoadingState(true, 0.4); // Update loading stage
+                        console.log('API Response:', data);
+                        return data;
+                    })
+                    .then(data => {
+                        setLoadingState(true, 0.7); // Update loading stage
+                        if (!data || typeof data !== 'object') {
+                            throw new Error('Invalid data format');
+                        }
+                        
+                        // Simulate analysis time
+                        setTimeout(() => {
+                            setLoadingState(true, 0.9); // Final loading stage
+                            setTimeout(() => {
+                                updateMetrics(data);
+                                document.getElementById('update-time').textContent = new Date().toLocaleString();
+                                setLoadingState(false); // Hide loading indicators
+                            }, 500);
+                        }, 800);
+                    })
+                    .catch(error => {
+                        setLoadingState(false); // Hide loading indicators on error
+                        displayError(error);
+                    });
+            } catch (error) {
+                setLoadingState(false); // Hide loading indicators on error
+                displayError(error);
+            }
+        }
+
+        // Update metric displays with validation
+        function updateMetrics(data) {
+            try {
+                if (!data) throw new Error('No data available');
+                
+                const safeUpdate = (elementId, value, fallback = '--') => {
+                    const element = document.getElementById(elementId);
+                    element.textContent = value !== undefined ? value : fallback;
+                };
+
+                safeUpdate('water-quality', data?.water_quality?.quality_index + '/100');
+                safeUpdate('mineral-rate', data?.mineral_extraction?.extraction_rate);
+                safeUpdate('timber-production', data?.timber_production?.production_volume);
+                
+                // Update pollution trend chart
+                updatePollutionTrendChart(data?.water_quality?.trends);
+                
+                // Update AI recommendations
+                const recommendationsElement = document.getElementById('recommendations-list');
+                if (recommendationsElement && data?.recommendations && Array.isArray(data.recommendations)) {
+                    if (data.recommendations.length > 0) {
+                        let recommendationsHTML = '<ul>';
+                        data.recommendations.forEach(recommendation => {
+                            recommendationsHTML += `<li>${recommendation}</li>`;
+                        });
+                        recommendationsHTML += '</ul>';
+                        recommendationsElement.innerHTML = recommendationsHTML;
+                    } else {
+                        recommendationsElement.innerHTML = '<p>No recommendations available</p>';
+                    }
+                }
+            } catch (error) {
+                displayError(error);
+            }
+        }
+        
+        // Chart instance variable
+        let pollutionTrendChart = null;
+        
+        // Function to update the pollution trend chart
+        function updatePollutionTrendChart(trendsData) {
+            const chartCanvas = document.getElementById('pollution-trend-chart');
+            const noDataMessage = document.getElementById('no-trend-data');
+            
+            // Check if we have valid trend data
+            if (!trendsData || !Array.isArray(trendsData) || trendsData.length === 0) {
+                // No data available, show message and hide chart
+                if (chartCanvas) chartCanvas.style.display = 'none';
+                if (noDataMessage) noDataMessage.style.display = 'block';
+                return;
+            }
+            
+            // We have data, show chart and hide message
+            if (chartCanvas) chartCanvas.style.display = 'block';
+            if (noDataMessage) noDataMessage.style.display = 'none';
+            
+            // Extract labels and data points from the trends data
+            const labels = trendsData.map(item => item.month);
+            const dataPoints = trendsData.map(item => item.value);
+            
+            // Define chart colors
+            const chartColors = {
+                backgroundColor: 'rgba(52, 152, 219, 0.2)',
+                borderColor: 'rgba(52, 152, 219, 1)',
+                pointBackgroundColor: 'rgba(52, 152, 219, 1)',
+                pointBorderColor: '#fff'
+            };
+            
+            // If chart already exists, update it
+            if (pollutionTrendChart) {
+                pollutionTrendChart.data.labels = labels;
+                pollutionTrendChart.data.datasets[0].data = dataPoints;
+                pollutionTrendChart.update();
+                return;
+            }
+            
+            // Create new chart
+            pollutionTrendChart = new Chart(chartCanvas, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Water Quality Index',
+                        data: dataPoints,
+                        backgroundColor: chartColors.backgroundColor,
+                        borderColor: chartColors.borderColor,
+                        borderWidth: 2,
+                        pointBackgroundColor: chartColors.pointBackgroundColor,
+                        pointBorderColor: chartColors.pointBorderColor,
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        tension: 0.3 // Smooth curve
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Water Quality Index Trends',
+                            font: {
+                                size: 16
+                            }
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false
+                        },
+                        legend: {
+                            position: 'top',
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: Math.max(0, Math.min(...dataPoints) - 10),
+                            max: Math.min(100, Math.max(...dataPoints) + 10),
+                            title: {
+                                display: true,
+                                text: 'Quality Index'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Month'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Error display function
+        function displayError(error) {
+            console.error('Dashboard Error:', error);
+            const errorContainer = document.createElement('div');
+            errorContainer.className = 'dashboard-error';
+            errorContainer.innerHTML = `
+                <h3>⚠️ Data Load Error</h3>
+                <p>${error.message}</p>
+                <p>Showing cached data</p>
+            `;
+            document.querySelector('main').prepend(errorContainer);
+            updateMetrics(mockData); // Fallback to mock data
+        }
+
+        // Initial load with error handling
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                // Show initial loading state
+                setLoadingState(true, 0);
+                
+                // Simulate analysis stages during initial load
+                let stage = 0;
+                const stageInterval = setInterval(() => {
+                    stage += 0.2;
+                    if (stage <= 1) {
+                        setLoadingState(true, stage);
+                    } else {
+                        clearInterval(stageInterval);
+                    }
+                }, 700);
+                
+                setTimeout(loadDashboardData, 1500);
+                // Set up periodic refresh
+                setInterval(loadDashboardData, 60000);
+            } catch (error) {
+                setLoadingState(false);
+                displayError(error);
+            }
+        });
+    </script>
+</body>
+</html>
