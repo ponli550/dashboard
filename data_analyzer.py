@@ -238,15 +238,9 @@ class DataAnalyzer:
         try:
             # Prepare a prompt that includes information from all datasets
             datasets_summary = {}
-            for data_type in self.processed_data.keys():
-                if data_type in self.insights:
-                    datasets_summary[data_type] = {
-                        "insights": self.insights.get(data_type, []),
-                        "problems": self.problems.get(data_type, [])
-                    }
-            
+            for data_type in self.processed_data.keys():    
             # Only proceed if we have insights from multiple datasets
-            if len(datasets_summary) >= 2:
+             if len(datasets_summary) >= 2:
                 prompt = f"""
                 Based on the following analysis of multiple environmental datasets from Malaysia,
                 provide comprehensive insights about the relationships between water pollution,

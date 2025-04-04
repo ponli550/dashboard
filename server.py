@@ -20,7 +20,8 @@ data_analyzer = DataAnalyzer()
 @app.route('/')
 def index():
     """Serve the dashboard HTML"""
-    return send_from_directory(os.path.dirname(os.path.abspath(__file__)), 'dashboard.html')
+    # For Vercel deployment, use a relative path
+    return send_from_directory('public', 'dashboard.html')
 
 @app.route('/api/data')
 def get_data():
@@ -100,5 +101,10 @@ def get_data():
         logger.error(f"API Error: {str(e)}")
         return jsonify({"error": str(e)}), 500
 
+# For local development
 if __name__ == '__main__':
     app.run(debug=True, port=8000)
+else:
+    # For Vercel serverless deployment
+    # The app variable will be used by Vercel
+    pass
