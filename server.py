@@ -441,4 +441,5 @@ def page_not_found(e):
 if __name__ == '__main__':
     # Get port from environment variable for Heroku
     port = int(os.environ.get('PORT', 8000))
-    app.run(host='0.0.0.0', port=port)
+    # Debug mode should be off in production
+    app.run(host='0.0.0.0', port=port, debug=False)
