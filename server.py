@@ -438,6 +438,5 @@ def page_not_found(e):
     }), 404
 
 if __name__ == '__main__':
-    # Make sure debug is set to False in production
-    debug_mode = os.environ.get('FLASK_ENV') == 'development'
-    app.run(debug=debug_mode, host='0.0.0.0', port=8000)
+    # Make sure the app is listening on 0.0.0.0 (all interfaces)
+    app.run(host='0.0.0.0', port=8000)
