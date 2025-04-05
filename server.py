@@ -439,4 +439,5 @@ def page_not_found(e):
 
 if __name__ == '__main__':
     # Make sure debug is set to False in production
-    app.run(debug=True, host='0.0.0.0', port=8000)
+    debug_mode = os.environ.get('FLASK_ENV') == 'development'
+    app.run(debug=debug_mode, host='0.0.0.0', port=8000)
