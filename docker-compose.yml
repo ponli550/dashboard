@@ -4,10 +4,11 @@ services:
   web:
     build: .
     ports:
-      - "8000:8000"  # Make sure this is correctly mapping host port 8000 to container port 8000
+      - "8000:8000"
     volumes:
       - ./Experiment:/app/Experiment
     environment:
       - FLASK_APP=server.py
       - FLASK_ENV=production
+      - PORT=8000
     restart: always

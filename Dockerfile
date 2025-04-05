@@ -2,19 +2,22 @@ FROM python:3.9-slim
 
 WORKDIR /app
 
+# Copy only requirements first to leverage Docker cache
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+# Copy Python files
+COPY *.py ./
+COPY dashboard.html ./
 
-# Make sure the data directory exists
+# Create necessary directories
 RUN mkdir -p /app/Experiment
+RUN mkdir -p /app/static
+RUN mkdir -p /app/templates
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
-ENV FLASK_APP=server.py
-ENV FLASK_ENV=production
 
 # Expose the port
 EXPOSE 8000
