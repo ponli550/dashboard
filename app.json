@@ -1,0 +1,17 @@
+{
+  "name": "KAISEL2 Dashboard",
+  "description": "Malaysia Sustainable Urban Development Dashboard",
+  "repository": "https://github.com/ponli550/KAISEL2",
+  "keywords": ["python", "flask", "dashboard"],
+  "env": {
+    "FLASK_ENV": {
+      "description": "Environment for Flask application",
+      "value": "production"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ]
+}

@@ -437,6 +437,8 @@ def page_not_found(e):
         "message": "Please check the URL and try again."
     }), 404
 
+# At the bottom of your file
 if __name__ == '__main__':
-    # Make sure the app is listening on 0.0.0.0 (all interfaces)
-    app.run(host='0.0.0.0', port=8000)
+    # Get port from environment variable for Heroku
+    port = int(os.environ.get('PORT', 8000))
+    app.run(host='0.0.0.0', port=port)
