@@ -202,19 +202,6 @@ class DataAnalyzer:
             self.problems[data_type] = analysis.get("problems", [])
             self.key_points[data_type] = analysis.get("key_points", [])
 
-            # Log success metrics
-            logger.info(f"Successfully parsed {len(self.insights[data_type])} insights "
-                      f"and {len(self.problems[data_type])} problems for {data_type}")
-            return True
-
-        except json.JSONDecodeError as e:
-            logger.error(f"JSON parsing failed for {data_type}: {str(e)}")
-            logger.debug(f"Raw API response: {analysis_text}")
-            return False
-        except Exception as e:
-            logger.error(f"Unexpected error parsing {data_type} results: {str(e)}")
-            return False
-
             # Store additional information if available
             if "trends" in analysis:
                 if "trends" not in self.insights:
@@ -225,22 +212,37 @@ class DataAnalyzer:
                 if "ai_correlations" not in self.correlations:
                     self.correlations["ai_correlations"] = {}
                 self.correlations["ai_correlations"][data_type] = analysis["correlations"]
-                
-        except json.JSONDecodeError:
-            logger.error(f"Failed to parse analysis results for {data_type} as JSON")
+
+            # Log success metrics
+            logger.info(f"Successfully parsed {len(self.insights[data_type])} insights "
+                      f"and {len(self.problems[data_type])} problems for {data_type}")
+            return True
+
+        except json.JSONDecodeError as e:
+            logger.error(f"JSON parsing failed for {data_type}: {str(e)}")
+            logger.debug(f"Raw API response: {analysis_text}")
             # Try to extract information using simple text parsing as fallback
             self.insights[data_type] = ["Analysis results could not be parsed properly"]
+            return False
         except Exception as e:
-            logger.error(f"Error parsing analysis results for {data_type}: {str(e)}")
+            logger.error(f"Unexpected error parsing {data_type} results: {str(e)}")
+            return False
     
     def _generate_cross_dataset_insights(self):
         """Generate insights that span across multiple datasets"""
         try:
             # Prepare a prompt that includes information from all datasets
             datasets_summary = {}
-            for data_type in self.processed_data.keys():    
+            for data_type in self.processed_data.keys():
+                if data_type in self.insights:
+                    datasets_summary[data_type] = {
+                        "insights": self.insights.get(data_type, []),
+                        "problems": self.problems.get(data_type, []),
+                        "key_points": self.key_points.get(data_type, [])
+                    }
+            
             # Only proceed if we have insights from multiple datasets
-             if len(datasets_summary) >= 2:
+            if len(datasets_summary) >= 2:
                 prompt = f"""
                 Based on the following analysis of multiple environmental datasets from Malaysia,
                 provide comprehensive insights about the relationships between water pollution,
