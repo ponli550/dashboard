@@ -11,3 +11,6 @@ venv.bak/
 .DS_Store
 node_modules/
 .vercel
+.idea/
+.vscode/
+*.log
