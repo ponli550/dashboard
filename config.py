@@ -19,3 +19,10 @@ DASHBOARD_DEBUG = True
 # Data analysis parameters
 ANALYSIS_TIMEFRAME = "monthly"  # Options: daily, monthly, yearly
 CORRELATION_THRESHOLD = 0.7     # Threshold for highlighting strong correlations
+
+# Azure deployment configuration
+AZURE_DEPLOYMENT = {
+    "enabled": True,
+    "port": 8000,
+    "host": "0.0.0.0"
+}
