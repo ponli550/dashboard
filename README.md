@@ -1,3 +1,4 @@
+AZURE
 # Malaysian Mineral Resources Analysis Dashboard
 
 This project analyzes mineral extraction data from Malaysia, using machine learning to identify patterns and AI to generate insights. The dashboard visualizes production trends, commodity growth rates, and state clustering based on production patterns.
