@@ -13,6 +13,10 @@
         .card {
             margin-bottom: 20px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
         }
         .insight-item {
             padding: 10px;
@@ -32,11 +36,21 @@
             margin-bottom: 10px;
             background-color: #f8f9fa;
         }
+        .header-banner {
+            background-color: #f8f9fa;
+            padding: 20px 0;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 class="text-center mb-4">Malaysia Sustainable Urban Development Dashboard</h1>
+        <div class="header-banner">
+            <h1 class="text-center mb-2">Malaysia Sustainable Urban Development Dashboard</h1>
+            <p class="text-center text-muted">Analyzing environmental data for sustainable development</p>
+        </div>
         
         <div class="row mb-4">
             <div class="col-md-12">
@@ -89,6 +103,12 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Footer section -->
+        <footer class="mt-5 text-center text-muted">
+            <p>© 2023 KAISEL2 Dashboard | Malaysia Sustainable Urban Development</p>
+            <p><small>Data updated: June 2023</small></p>
+        </footer>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
