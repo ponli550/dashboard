@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KAISEL2 Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding-top: 20px;
+        }
+        .card {
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .insight-item {
+            padding: 10px;
+            border-left: 4px solid #28a745;
+            margin-bottom: 10px;
+            background-color: #f8f9fa;
+        }
+        .problem-item {
+            padding: 10px;
+            border-left: 4px solid #dc3545;
+            margin-bottom: 10px;
+            background-color: #f8f9fa;
+        }
+        .key-point-item {
+            padding: 10px;
+            border-left: 4px solid #007bff;
+            margin-bottom: 10px;
+            background-color: #f8f9fa;
+        }
+        #loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">Malaysia Sustainable Urban Development Dashboard</h1>
+        
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Data Analysis Dashboard</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>This dashboard provides analysis of environmental data related to sustainable urban development in Malaysia.</p>
+                        <button id="loadDataBtn" class="btn btn-primary">Load Analysis</button>
+                        <div id="loading" class="mt-3">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <p class="mt-2">Analyzing data, please wait...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row" id="dashboardContent" style="display: none;">
+            <!-- Mineral Extraction Section -->
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0">Mineral Extraction</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6>Key Insights</h6>
+                        <div id="mineralInsights" class="mb-3"></div>
+                        
+                        <h6>Problems Identified</h6>
+                        <div id="mineralProblems" class="mb-3"></div>
+                        
+                        <h6>Key Points</h6>
+                        <div id="mineralKeyPoints"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Water Quality Section -->
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-header bg-info text-white">
+                        <h5 class="mb-0">Water Quality</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6>Key Insights</h6>
+                        <div id="waterInsights" class="mb-3"></div>
+                        
+                        <h6>Problems Identified</h6>
+                        <div id="waterProblems" class="mb-3"></div>
+                        
+                        <h6>Key Points</h6>
+                        <div id="waterKeyPoints"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Timber Production Section -->
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-header bg-warning text-dark">
+                        <h5 class="mb-0">Timber Production</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6>Key Insights</h6>
+                        <div id="timberInsights" class="mb-3"></div>
+                        
+                        <h6>Problems Identified</h6>
+                        <div id="timberProblems" class="mb-3"></div>
+                        
+                        <h6>Key Points</h6>
+                        <div id="timberKeyPoints"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Integrated Insights Section -->
+        <div class="row mt-4" id="integratedSection" style="display: none;">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header bg-dark text-white">
+                        <h5 class="mb-0">Integrated Analysis</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6>Integrated Insights</h6>
+                        <div id="integratedInsights" class="mb-3"></div>
+                        
+                        <h6>Systemic Problems</h6>
+                        <div id="systemicProblems" class="mb-3"></div>
+                        
+                        <h6>Recommendations</h6>
+                        <div id="recommendations"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
