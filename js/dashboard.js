@@ -67,6 +67,26 @@ const sampleData = {
             "Develop cross-sector sustainability metrics and reporting requirements.",
             "Increase community involvement in environmental monitoring and decision-making."
         ]
+    },
+    // Add chart data
+    charts: {
+        mineral: {
+            labels: ["Iron", "Bauxite", "Tin", "Gold", "Copper"],
+            values: [4500, 3200, 2100, 1800, 2700]
+        },
+        water: {
+            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            values: [72, 68, 65, 70, 75, 78, 76, 74, 72, 70, 73, 75]
+        },
+        timber: {
+            labels: ["Sarawak", "Sabah", "Pahang", "Kelantan", "Others"],
+            values: [45, 25, 15, 10, 5]
+        },
+        integrated: {
+            labels: ["Water Quality", "Forest Cover", "Biodiversity", "Air Quality", "Soil Health", "Waste Management"],
+            current: [65, 48, 52, 70, 55, 60],
+            target: [85, 75, 80, 90, 75, 85]
+        }
     }
 };
 
@@ -79,6 +99,22 @@ async function analyzeWithDeepseek(dataType) {
             resolve(sampleData[dataType]);
         }, 1500); // Simulate API delay
     });
+}
+
+// Function to load data from JSON file
+async function loadDataFromJson() {
+    try {
+        // Use a relative path that works with static file serving
+        const response = await fetch('./dashboard.json');
+        if (!response.ok) {
+            throw new Error('Failed to load dashboard data');
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Error loading JSON data:', error);
+        // Fall back to sample data if JSON loading fails
+        return sampleData;
+    }
 }
 
 // Function to display insights in the UI
@@ -112,6 +148,8 @@ function displayKeyPoints(containerId, keyPoints) {
     const container = document.getElementById(containerId);
     container.innerHTML = '';
     
+    if (!keyPoints) return;
+    
     keyPoints.forEach(point => {
         const div = document.createElement('div');
         div.className = 'key-point-item';
@@ -120,49 +158,198 @@ function displayKeyPoints(containerId, keyPoints) {
     });
 }
 
+// Chart creation functions
+function createMineralChart(data) {
+    const ctx = document.getElementById('mineralChart');
+    if (!ctx) return;
+    
+    new Chart(ctx.getContext('2d'), {
+        type: 'bar',
+        data: {
+            labels: data.labels,
+            datasets: [{
+                label: 'Extraction Volume (tons)',
+                data: data.values,
+                backgroundColor: 'rgba(40, 167, 69, 0.6)',
+                borderColor: 'rgba(40, 167, 69, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}
+
+function createWaterChart(data) {
+    const ctx = document.getElementById('waterChart');
+    if (!ctx) return;
+    
+    new Chart(ctx.getContext('2d'), {
+        type: 'line',
+        data: {
+            labels: data.labels,
+            datasets: [{
+                label: 'Water Quality Index',
+                data: data.values,
+                backgroundColor: 'rgba(23, 162, 184, 0.2)',
+                borderColor: 'rgba(23, 162, 184, 1)',
+                borderWidth: 2,
+                tension: 0.1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
+}
+
+function createTimberChart(data) {
+    const ctx = document.getElementById('timberChart');
+    if (!ctx) return;
+    
+    new Chart(ctx.getContext('2d'), {
+        type: 'pie',
+        data: {
+            labels: data.labels,
+            datasets: [{
+                data: data.values,
+                backgroundColor: [
+                    'rgba(255, 193, 7, 0.6)',
+                    'rgba(40, 167, 69, 0.6)',
+                    'rgba(23, 162, 184, 0.6)',
+                    'rgba(220, 53, 69, 0.6)',
+                    'rgba(111, 66, 193, 0.6)'
+                ],
+                borderColor: [
+                    'rgba(255, 193, 7, 1)',
+                    'rgba(40, 167, 69, 1)',
+                    'rgba(23, 162, 184, 1)',
+                    'rgba(220, 53, 69, 1)',
+                    'rgba(111, 66, 193, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
+}
+
+function createIntegratedChart(data) {
+    const ctx = document.getElementById('integratedChart');
+    if (!ctx) return;
+    
+    new Chart(ctx.getContext('2d'), {
+        type: 'radar',
+        data: {
+            labels: data.labels,
+            datasets: [{
+                label: 'Current Status',
+                data: data.current,
+                backgroundColor: 'rgba(220, 53, 69, 0.2)',
+                borderColor: 'rgba(220, 53, 69, 1)',
+                borderWidth: 2
+            }, {
+                label: 'Target',
+                data: data.target,
+                backgroundColor: 'rgba(40, 167, 69, 0.2)',
+                borderColor: 'rgba(40, 167, 69, 1)',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                r: {
+                    beginAtZero: true,
+                    max: 100
+                }
+            }
+        }
+    });
+}
+
 // Main function to load and display all data
 async function loadAllData() {
-    document.getElementById('loading').style.display = 'block';
-    document.getElementById('loadDataBtn').disabled = true;
+    const loadingElement = document.getElementById('loading');
+    const loadDataBtn = document.getElementById('loadDataBtn');
+    
+    if (loadingElement) loadingElement.style.display = 'block';
+    if (loadDataBtn) loadDataBtn.disabled = true;
     
     try {
+        // Try to load data from JSON file first, fall back to sample data
+        const data = await loadDataFromJson();
+        
         // Load mineral extraction data
-        const mineralData = await analyzeWithDeepseek('mineral_extraction');
-        displayInsights('mineralInsights', mineralData.insights);
-        displayProblems('mineralProblems', mineralData.problems);
-        displayKeyPoints('mineralKeyPoints', mineralData.key_points);
+        if (data.mineral_extraction) {
+            displayInsights('mineralInsights', data.mineral_extraction.insights);
+            displayProblems('mineralProblems', data.mineral_extraction.problems);
+            displayKeyPoints('mineralKeyPoints', data.mineral_extraction.key_points);
+        }
         
         // Load water quality data
-        const waterData = await analyzeWithDeepseek('water_quality');
-        displayInsights('waterInsights', waterData.insights);
-        displayProblems('waterProblems', waterData.problems);
-        displayKeyPoints('waterKeyPoints', waterData.key_points);
+        if (data.water_quality) {
+            displayInsights('waterInsights', data.water_quality.insights);
+            displayProblems('waterProblems', data.water_quality.problems);
+            displayKeyPoints('waterKeyPoints', data.water_quality.key_points);
+        }
         
         // Load timber production data
-        const timberData = await analyzeWithDeepseek('timber_production');
-        displayInsights('timberInsights', timberData.insights);
-        displayProblems('timberProblems', timberData.problems);
-        displayKeyPoints('timberKeyPoints', timberData.key_points);
+        if (data.timber_production) {
+            displayInsights('timberInsights', data.timber_production.insights);
+            displayProblems('timberProblems', data.timber_production.problems);
+            displayKeyPoints('timberKeyPoints', data.timber_production.key_points);
+        }
         
         // Load integrated analysis
-        const integratedData = await analyzeWithDeepseek('integrated');
-        displayInsights('integratedInsights', integratedData.integrated_insights);
-        displayProblems('systemicProblems', integratedData.systemic_problems);
-        displayKeyPoints('recommendations', integratedData.recommendations);
+        if (data.integrated) {
+            displayInsights('integratedInsights', data.integrated.integrated_insights);
+            displayProblems('systemicProblems', data.integrated.systemic_problems);
+            displayKeyPoints('recommendations', data.integrated.recommendations);
+        }
+        
+        // Create charts if chart data exists
+        if (data.charts) {
+            if (data.charts.mineral) createMineralChart(data.charts.mineral);
+            if (data.charts.water) createWaterChart(data.charts.water);
+            if (data.charts.timber) createTimberChart(data.charts.timber);
+            if (data.charts.integrated) createIntegratedChart(data.charts.integrated);
+        }
         
         // Show all sections
-        document.getElementById('dashboardContent').style.display = 'flex';
-        document.getElementById('integratedSection').style.display = 'block';
+        const dashboardContent = document.getElementById('dashboardContent');
+        const integratedSection = document.getElementById('integratedSection');
+        
+        if (dashboardContent) dashboardContent.style.display = 'flex';
+        if (integratedSection) integratedSection.style.display = 'block';
     } catch (error) {
         console.error('Error loading data:', error);
         alert('An error occurred while loading the data. Please try again.');
     } finally {
-        document.getElementById('loading').style.display = 'none';
-        document.getElementById('loadDataBtn').disabled = false;
+        if (loadingElement) loadingElement.style.display = 'none';
+        if (loadDataBtn) loadDataBtn.disabled = false;
     }
 }
 
 // Event listeners
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('loadDataBtn').addEventListener('click', loadAllData);
+    const loadDataBtn = document.getElementById('loadDataBtn');
+    if (loadDataBtn) {
+        loadDataBtn.addEventListener('click', loadAllData);
+    } else {
+        // If there's no load button, load data automatically
+        loadAllData();
+    }
 });

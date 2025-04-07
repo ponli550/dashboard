@@ -68,9 +68,74 @@
 </head>
 <body>
     <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4 rounded shadow-sm">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">
+                    <i class="bi bi-bar-chart-fill text-primary me-2"></i>
+                    KAISEL2
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="dashboard.html">Dashboard</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        
         <div class="header-banner">
             <h1 class="text-center mb-2">Malaysia Sustainable Urban Development Dashboard</h1>
             <p class="text-center text-muted">Analyzing environmental data for sustainable development</p>
+        </div>
+        
+        <!-- Add a new statistics section -->
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <h4 class="mb-3">Key Statistics</h4>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card bg-light">
+                    <div class="stat-icon text-primary">
+                        <i class="bi bi-gem"></i>
+                    </div>
+                    <div class="stat-value">15.2M</div>
+                    <div class="stat-label">Tons of Minerals Extracted</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card bg-light">
+                    <div class="stat-icon text-info">
+                        <i class="bi bi-droplet"></i>
+                    </div>
+                    <div class="stat-value">78%</div>
+                    <div class="stat-label">Water Quality Index</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card bg-light">
+                    <div class="stat-icon text-success">
+                        <i class="bi bi-tree"></i>
+                    </div>
+                    <div class="stat-value">3.2M</div>
+                    <div class="stat-label">Timber Production (units)</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card bg-light">
+                    <div class="stat-icon text-warning">
+                        <i class="bi bi-graph-up"></i>
+                    </div>
+                    <div class="stat-value">12.5%</div>
+                    <div class="stat-label">Annual Growth Rate</div>
+                </div>
+            </div>
         </div>
         
         <div class="row mb-4">
@@ -82,6 +147,9 @@
                     <div class="card-body">
                         <p>This dashboard provides analysis of environmental data related to sustainable urban development in Malaysia.</p>
                         <p>Explore insights on mineral extraction, water quality, and timber production.</p>
+                        <a href="dashboard.html" class="btn btn-primary mt-2">
+                            <i class="bi bi-bar-chart-line me-2"></i>View Detailed Dashboard
+                        </a>
                         
                         <div class="row mt-4">
                             <div class="col-md-4">

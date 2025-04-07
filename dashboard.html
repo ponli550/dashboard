@@ -3,162 +3,229 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="AI-Powered Malaysian Mineral Resources Dashboard for analyzing mineral production data">
-    <title>Malaysian Mineral Resources Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>KAISEL2 Dashboard - Detailed View</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.css">
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f8f9fa;
-            color: #343a40;
-        }
-        .dashboard-header {
-            background-color: #2c3e50;
-            color: white;
-            padding: 20px 0;
-            margin-bottom: 30px;
+            padding-top: 20px;
+            background-color: #f5f5f5;
         }
         .card {
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
-            transition: transform 0.3s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
         }
         .card:hover {
             transform: translateY(-5px);
         }
-        .card-header {
-            border-radius: 10px 10px 0 0 !important;
-            font-weight: bold;
+        .insight-item {
+            padding: 10px;
+            border-left: 4px solid #28a745;
+            margin-bottom: 10px;
+            background-color: #f8f9fa;
         }
-        .mineral-card .card-header {
-            background-color: #e67e22;
-            color: white;
+        .problem-item {
+            padding: 10px;
+            border-left: 4px solid #dc3545;
+            margin-bottom: 10px;
+            background-color: #f8f9fa;
         }
-        .insights-card .card-header {
-            background-color: #8e44ad;
-            color: white;
+        .key-point-item {
+            padding: 10px;
+            border-left: 4px solid #007bff;
+            margin-bottom: 10px;
+            background-color: #f8f9fa;
         }
         .chart-container {
             position: relative;
             height: 300px;
             width: 100%;
-            margin-bottom: 20px;
         }
-        .insight-item {
-            padding: 10px;
-            border-left: 4px solid #8e44ad;
-            margin-bottom: 10px;
-            background-color: #f8f9fa;
+        .nav-pills .nav-link.active {
+            background-color: #007bff;
         }
-        .loading {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 200px;
-        }
-        .spinner-border {
-            width: 3rem;
-            height: 3rem;
-        }
-        .state-cluster {
-            padding: 8px;
-            margin: 5px;
-            border-radius: 5px;
-            display: inline-block;
-        }
-        .cluster-0 { background-color: #3498db; color: white; }
-        .cluster-1 { background-color: #2ecc71; color: white; }
-        .cluster-2 { background-color: #e74c3c; color: white; }
-        .cluster-3 { background-color: #f39c12; color: white; }
-        .cluster-4 { background-color: #9b59b6; color: white; }
-        .retry-button {
-            margin-top: 15px;
+        .nav-pills .nav-link {
+            color: #495057;
         }
     </style>
 </head>
 <body>
-    <div class="dashboard-header">
-        <div class="container">
-            <h1 class="text-center">Malaysian Mineral Resources Dashboard</h1>
-            <p class="text-center">AI-Powered Insights for Sustainable Resource Management</p>
-        </div>
-    </div>
-
     <div class="container">
-        <div class="row">
-            <!-- Mineral Production Overview -->
-            <div class="col-md-6 mb-4">
-                <div class="card mineral-card">
-                    <div class="card-header">
-                        Mineral Production by Type
-                    </div>
-                    <div class="card-body">
-                        <div class="chart-container">
-                            <canvas id="mineralTypeChart"></canvas>
-                        </div>
-                    </div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4 rounded shadow-sm">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">
+                    <i class="bi bi-bar-chart-fill text-primary me-2"></i>
+                    KAISEL2
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="dashboard.html">Dashboard</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
+        </nav>
 
-            <!-- Top Commodities -->
-            <div class="col-md-6 mb-4">
-                <div class="card mineral-card">
-                    <div class="card-header">
-                        Top Commodities by Production Volume
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Detailed Analysis Dashboard</h5>
                     </div>
                     <div class="card-body">
-                        <div class="chart-container">
-                            <canvas id="topCommoditiesChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- State Production Map -->
-            <div class="col-md-6 mb-4">
-                <div class="card mineral-card">
-                    <div class="card-header">
-                        State Production Clusters
-                    </div>
-                    <div class="card-body">
-                        <div id="stateClusters">
-                            <div class="loading">
-                                <div class="spinner-border text-primary" role="status">
-                                    <span class="visually-hidden">Loading...</span>
+                        <ul class="nav nav-pills mb-4" id="analysisTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="mineral-tab" data-bs-toggle="pill" data-bs-target="#mineral" type="button" role="tab">Mineral Extraction</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="water-tab" data-bs-toggle="pill" data-bs-target="#water" type="button" role="tab">Water Quality</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="timber-tab" data-bs-toggle="pill" data-bs-target="#timber" type="button" role="tab">Timber Production</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="integrated-tab" data-bs-toggle="pill" data-bs-target="#integrated" type="button" role="tab">Integrated Analysis</button>
+                            </li>
+                        </ul>
+                        
+                        <div class="tab-content" id="analysisTabContent">
+                            <!-- Mineral Extraction Tab -->
+                            <div class="tab-pane fade show active" id="mineral" role="tabpanel">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-header bg-success text-white">
+                                                <h5 class="mb-0">Mineral Extraction Trends</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="chart-container">
+                                                    <canvas id="mineralChart"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-header bg-success text-white">
+                                                <h5 class="mb-0">Key Insights</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div id="mineralInsights"></div>
+                                                <h6 class="mt-4">Problems Identified</h6>
+                                                <div id="mineralProblems"></div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Growth Rates -->
-            <div class="col-md-6 mb-4">
-                <div class="card mineral-card">
-                    <div class="card-header">
-                        Commodity Growth Rates
-                    </div>
-                    <div class="card-body">
-                        <div class="chart-container">
-                            <canvas id="growthRatesChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- AI Insights -->
-            <div class="col-md-12 mb-4">
-                <div class="card insights-card">
-                    <div class="card-header">
-                        AI-Generated Insights
-                    </div>
-                    <div class="card-body">
-                        <div id="insights-container">
-                            <div class="loading">
-                                <div class="spinner-border text-primary" role="status">
-                                    <span class="visually-hidden">Loading...</span>
+                            
+                            <!-- Water Quality Tab -->
+                            <div class="tab-pane fade" id="water" role="tabpanel">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-header bg-info text-white">
+                                                <h5 class="mb-0">Water Quality Indicators</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="chart-container">
+                                                    <canvas id="waterChart"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-header bg-info text-white">
+                                                <h5 class="mb-0">Key Insights</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div id="waterInsights"></div>
+                                                <h6 class="mt-4">Problems Identified</h6>
+                                                <div id="waterProblems"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Timber Production Tab -->
+                            <div class="tab-pane fade" id="timber" role="tabpanel">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-header bg-warning text-dark">
+                                                <h5 class="mb-0">Timber Production by Region</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="chart-container">
+                                                    <canvas id="timberChart"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-header bg-warning text-dark">
+                                                <h5 class="mb-0">Key Insights</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div id="timberInsights"></div>
+                                                <h6 class="mt-4">Problems Identified</h6>
+                                                <div id="timberProblems"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Integrated Analysis Tab -->
+                            <div class="tab-pane fade" id="integrated" role="tabpanel">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card">
+                                            <div class="card-header bg-dark text-white">
+                                                <h5 class="mb-0">Integrated Environmental Impact</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="chart-container">
+                                                    <canvas id="integratedChart"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-header bg-dark text-white">
+                                                <h5 class="mb-0">Systemic Issues</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div id="systemicProblems"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-header bg-dark text-white">
+                                                <h5 class="mb-0">Recommendations</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div id="recommendations"></div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -166,277 +233,174 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Footer section -->
+        <footer class="mt-5 text-center text-muted">
+            <p>© 2023 KAISEL2 Dashboard | Malaysia Sustainable Urban Development</p>
+            <p><small>Data updated: June 2023</small></p>
+        </footer>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
     <script>
-        // Fetch data from API with retry mechanism
-        async function fetchData(retryCount = 0) {
-            try {
-                const maxRetries = 3;
-                const response = await fetch('/api/data');
+        // Fetch dashboard data
+        fetch('dashboard.json')
+            .then(response => response.json())
+            .then(data => {
+                // Populate insights and problems
+                populateInsights('mineralInsights', data.mineral_extraction.insights);
+                populateProblems('mineralProblems', data.mineral_extraction.problems);
                 
-                if (!response.ok) {
-                    throw new Error(`Network response was not ok: ${response.status}`);
-                }
+                populateInsights('waterInsights', data.water_quality.insights);
+                populateProblems('waterProblems', data.water_quality.problems);
                 
-                const data = await response.json();
-                updateDashboard(data);
-            } catch (error) {
-                console.error('Error fetching data:', error);
+                populateInsights('timberInsights', data.timber_production.insights);
+                populateProblems('timberProblems', data.timber_production.problems);
                 
-                // Implement retry logic
-                if (retryCount < 3) {
-                    console.log(`Retrying... (${retryCount + 1}/3)`);
-                    setTimeout(() => fetchData(retryCount + 1), 2000 * (retryCount + 1));
-                } else {
-                    document.querySelectorAll('.loading').forEach(el => {
-                        el.innerHTML = `
-                            <div class="alert alert-danger">
-                                Error loading data: ${error.message}
-                                <button class="btn btn-primary retry-button" onclick="fetchData()">Retry</button>
-                            </div>
-                        `;
-                    });
-                }
-            }
-        }
-
-        // Update dashboard with data
-        function updateDashboard(data) {
-            if (data.mineral_extraction) {
-                const mineralData = data.mineral_extraction;
+                populateProblems('systemicProblems', data.integrated.systemic_problems);
+                populateInsights('recommendations', data.integrated.recommendations);
                 
-                // Update mineral type chart
-                if (mineralData.yearly_production_by_type) {
-                    createMineralTypeChart(mineralData.yearly_production_by_type);
-                }
-                
-                // Update top commodities chart
-                if (mineralData.top_commodities) {
-                    createTopCommoditiesChart(mineralData.top_commodities);
-                }
-                
-                // Update growth rates chart
-                if (mineralData.commodity_growth_rates) {
-                    createGrowthRatesChart(mineralData.commodity_growth_rates);
-                }
-                
-                // Update state clusters
-                if (mineralData.state_clusters && mineralData.cluster_profiles) {
-                    createStateClustersView(mineralData.state_clusters, mineralData.cluster_profiles);
-                }
-                
-                // Update insights
-                if (mineralData.insights) {
-                    createInsightsView(mineralData.insights);
-                }
-            } else {
-                document.querySelectorAll('.loading').forEach(el => {
-                    el.innerHTML = `
-                        <div class="alert alert-warning">
-                            No mineral extraction data available.
-                            <button class="btn btn-primary retry-button" onclick="fetchData()">Retry</button>
-                        </div>
-                    `;
-                });
-            }
-        }
-
-        function createMineralTypeChart(yearlyProductionData) {
-            const years = Object.keys(yearlyProductionData);
-            const types = Object.keys(yearlyProductionData[years[0]]);
-            
-            const datasets = types.map(type => {
-                const color = type === 'energy' ? '#e74c3c' : 
-                              type === 'metallic' ? '#3498db' : '#2ecc71';
-                
-                return {
-                    label: type.charAt(0).toUpperCase() + type.slice(1),
-                    data: years.map(year => yearlyProductionData[year][type]),
-                    backgroundColor: color,
-                    borderColor: color,
-                    borderWidth: 1
-                };
+                // Create charts
+                createMineralChart(data.charts.mineral);
+                createWaterChart(data.charts.water);
+                createTimberChart(data.charts.timber);
+                createIntegratedChart(data.charts.integrated);
+            })
+            .catch(error => console.error('Error loading dashboard data:', error));
+        
+        function populateInsights(containerId, insights) {
+            const container = document.getElementById(containerId);
+            insights.forEach(insight => {
+                const div = document.createElement('div');
+                div.className = 'insight-item';
+                div.textContent = insight;
+                container.appendChild(div);
             });
-            
-            const ctx = document.getElementById('mineralTypeChart').getContext('2d');
+        }
+        
+        function populateProblems(containerId, problems) {
+            const container = document.getElementById(containerId);
+            problems.forEach(problem => {
+                const div = document.createElement('div');
+                div.className = 'problem-item';
+                div.textContent = problem;
+                container.appendChild(div);
+            });
+        }
+        
+        function createMineralChart(data) {
+            const ctx = document.getElementById('mineralChart').getContext('2d');
             new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: years,
-                    datasets: datasets
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'Extraction Volume (tons)',
+                        data: data.values,
+                        backgroundColor: 'rgba(40, 167, 69, 0.6)',
+                        borderColor: 'rgba(40, 167, 69, 1)',
+                        borderWidth: 1
+                    }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
                     scales: {
-                        x: {
-                            stacked: true,
-                            title: {
-                                display: true,
-                                text: 'Year'
-                            }
-                        },
                         y: {
-                            stacked: true,
-                            title: {
-                                display: true,
-                                text: 'Production Volume'
-                            }
+                            beginAtZero: true
                         }
                     }
                 }
             });
         }
-
-        function createTopCommoditiesChart(topCommoditiesData) {
-            const commodities = Object.keys(topCommoditiesData);
-            const values = Object.values(topCommoditiesData);
-            
-            // Generate colors
-            const colors = commodities.map((_, i) => {
-                const hue = (i * 137) % 360;
-                return `hsl(${hue}, 70%, 60%)`;
+        
+        function createWaterChart(data) {
+            const ctx = document.getElementById('waterChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'Water Quality Index',
+                        data: data.values,
+                        backgroundColor: 'rgba(23, 162, 184, 0.2)',
+                        borderColor: 'rgba(23, 162, 184, 1)',
+                        borderWidth: 2,
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
             });
-            
-            const ctx = document.getElementById('topCommoditiesChart').getContext('2d');
+        }
+        
+        function createTimberChart(data) {
+            const ctx = document.getElementById('timberChart').getContext('2d');
             new Chart(ctx, {
                 type: 'pie',
                 data: {
-                    labels: commodities,
+                    labels: data.labels,
                     datasets: [{
-                        data: values,
-                        backgroundColor: colors,
+                        data: data.values,
+                        backgroundColor: [
+                            'rgba(255, 193, 7, 0.6)',
+                            'rgba(40, 167, 69, 0.6)',
+                            'rgba(23, 162, 184, 0.6)',
+                            'rgba(220, 53, 69, 0.6)',
+                            'rgba(111, 66, 193, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 193, 7, 1)',
+                            'rgba(40, 167, 69, 1)',
+                            'rgba(23, 162, 184, 1)',
+                            'rgba(220, 53, 69, 1)',
+                            'rgba(111, 66, 193, 1)'
+                        ],
                         borderWidth: 1
                     }]
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'right'
-                        }
-                    }
+                    maintainAspectRatio: false
                 }
             });
         }
-
-        function createGrowthRatesChart(growthRatesData) {
-            const commodities = Object.keys(growthRatesData);
-            const rates = Object.values(growthRatesData);
-            
-            // Sort by growth rate
-            const sortedIndices = rates.map((rate, i) => i)
-                .sort((a, b) => rates[b] - rates[a]);
-            
-            const sortedCommodities = sortedIndices.map(i => commodities[i]);
-            const sortedRates = sortedIndices.map(i => rates[i]);
-            
-            // Take top 10 and bottom 10
-            const topBottom = [...sortedCommodities.slice(0, 5), ...sortedCommodities.slice(-5)].reverse();
-            const topBottomRates = [...sortedRates.slice(0, 5), ...sortedRates.slice(-5)].reverse();
-            
-            const colors = topBottomRates.map(rate => rate >= 0 ? '#2ecc71' : '#e74c3c');
-            
-            const ctx = document.getElementById('growthRatesChart').getContext('2d');
+        
+        function createIntegratedChart(data) {
+            const ctx = document.getElementById('integratedChart').getContext('2d');
             new Chart(ctx, {
-                type: 'bar',
+                type: 'radar',
                 data: {
-                    labels: topBottom,
+                    labels: data.labels,
                     datasets: [{
-                        label: 'Growth Rate (%)',
-                        data: topBottomRates,
-                        backgroundColor: colors,
-                        borderColor: colors,
-                        borderWidth: 1
+                        label: 'Current Status',
+                        data: data.current,
+                        backgroundColor: 'rgba(220, 53, 69, 0.2)',
+                        borderColor: 'rgba(220, 53, 69, 1)',
+                        borderWidth: 2
+                    }, {
+                        label: 'Target',
+                        data: data.target,
+                        backgroundColor: 'rgba(40, 167, 69, 0.2)',
+                        borderColor: 'rgba(40, 167, 69, 1)',
+                        borderWidth: 2
                     }]
                 },
                 options: {
-                    indexAxis: 'y',
                     responsive: true,
                     maintainAspectRatio: false,
                     scales: {
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'Growth Rate (%)'
-                            }
+                        r: {
+                            beginAtZero: true,
+                            max: 100
                         }
                     }
                 }
             });
         }
-
-        function createStateClustersView(stateClusters, clusterProfiles) {
-            const container = document.getElementById('stateClusters');
-            container.innerHTML = '';
-            
-            const clusterDiv = document.createElement('div');
-            clusterDiv.className = 'mb-4';
-            
-            // Create state clusters visualization
-            Object.entries(stateClusters).forEach(([state, cluster]) => {
-                const stateSpan = document.createElement('span');
-                stateSpan.className = `state-cluster cluster-${cluster}`;
-                stateSpan.textContent = state;
-                clusterDiv.appendChild(stateSpan);
-            });
-            
-            container.appendChild(clusterDiv);
-            
-            // Create cluster profiles description
-            const profilesDiv = document.createElement('div');
-            
-            Object.entries(clusterProfiles).forEach(([cluster, profile]) => {
-                const profileCard = document.createElement('div');
-                profileCard.className = 'card mb-3';
-                
-                const cardHeader = document.createElement('div');
-                cardHeader.className = `card-header cluster-${cluster}`;
-                cardHeader.textContent = `Cluster ${parseInt(cluster) + 1}`;
-                
-                const cardBody = document.createElement('div');
-                cardBody.className = 'card-body';
-                
-                const statesP = document.createElement('p');
-                statesP.innerHTML = `<strong>States:</strong> ${profile.states.join(', ')}`;
-                
-                const commoditiesP = document.createElement('p');
-                commoditiesP.innerHTML = `<strong>Top Commodities:</strong> ${profile.top_commodities.join(', ')}`;
-                
-                cardBody.appendChild(statesP);
-                cardBody.appendChild(commoditiesP);
-                
-                profileCard.appendChild(cardHeader);
-                profileCard.appendChild(cardBody);
-                
-                profilesDiv.appendChild(profileCard);
-            });
-            
-            container.appendChild(profilesDiv);
-        }
-
-        function createInsightsView(insights) {
-            const container = document.getElementById('insights-container');
-            container.innerHTML = '';
-            
-            insights.forEach(insight => {
-                const insightDiv = document.createElement('div');
-                insightDiv.className = 'insight-item';
-                insightDiv.textContent = insight;
-                container.appendChild(insightDiv);
-            });
-            
-            // Add AI attribution
-            const attribution = document.createElement('p');
-            attribution.className = 'text-muted mt-3';
-            attribution.innerHTML = 'These insights were generated using machine learning analysis of the mineral extraction data and enhanced with DeepSeek AI.';
-            container.appendChild(attribution);
-        }
-
-        // Load data when page loads
-        document.addEventListener('DOMContentLoaded', fetchData);
     </script>
 </body>
 </html>
