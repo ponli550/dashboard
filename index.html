@@ -37,6 +37,26 @@
             margin-bottom: 10px;
             background-color: #f8f9fa;
         }
+        
+        /* Header banner styles */
+        .header-banner {
+            width: 100%;
+            max-height: 120px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            background-color: #f8f9fa;
+            padding: 10px 0;
+        }
+        
+        .banner-container {
+            text-align: center;
+            background-color: #f8f9fa;
+            padding: 10px 0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        /* This header-banner style is overriding the previous one */
         .header-banner {
             background-color: #f8f9fa;
             padding: 20px 0;
@@ -67,6 +87,11 @@
     </style>
 </head>
 <body>
+    <!-- Header Banner -->
+    <div class="banner-container">
+        <img src="images/header-logos.png" alt="UKM, Watan Kita, Fakulti Sains & Teknologi, Statistics, Data Challenge" class="header-banner" onerror="this.onerror=null; this.src='https://i.imgur.com/JLhMU8B.png';">
+    </div>
+    
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4 rounded shadow-sm">
             <div class="container-fluid">
