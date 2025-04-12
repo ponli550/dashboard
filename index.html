@@ -88,8 +88,8 @@
 </head>
 <body>
     <!-- Header Banner -->
-    <div class="banner-container">
-        <img src="images/header-logos.png" alt="UKM, Watan Kita, Fakulti Sains & Teknologi, Statistics, Data Challenge" class="header-banner" onerror="this.onerror=null; this.src='https://i.imgur.com/JLhMU8B.png';">
+    <div class="banner-container" id="header-banner-container">
+        <img src="images/header-logos.png" alt="UKM, Watan Kita, Fakulti Sains & Teknologi, Statistics, Data Challenge" class="header-banner" onerror="this.onerror=null; loadHeaderFromText();">
     </div>
     
     <div class="container">
@@ -226,5 +226,27 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        function loadHeaderFromText() {
+            fetch('images/header-image.txt')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-banner-container').innerHTML = data;
+                })
+                .catch(error => {
+                    console.error('Error loading header image:', error);
+                    // Fallback to a direct image URL if text file fails
+                    document.getElementById('header-banner-container').innerHTML = 
+                        '<img src="https://i.ibb.co/Qj9VDNL/university-logos-banner.png" alt="UKM, Watan Kita, Fakulti Sains & Teknologi, Statistics, Data Challenge" class="header-banner">';
+                });
+        }
+        
+        // Check if the image failed to load
+        document.querySelector('.header-banner').onerror = function() {
+            this.onerror = null;
+            loadHeaderFromText();
+        };
+    </script>
 </body>
 </html>
