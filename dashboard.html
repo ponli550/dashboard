@@ -3,20 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Malaysian Environmental Impact Dashboard</title>
+    <title>KAISEL Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding-top: 20px;
-            background-color: #f5f5f5;
         }
         .card {
             margin-bottom: 20px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-        .card:hover {
-            transform: translateY(-5px);
         }
         .insight-item {
             padding: 10px;
@@ -30,23 +26,12 @@
             margin-bottom: 10px;
             background-color: #f8f9fa;
         }
-        .key-point-item {
-            padding: 10px;
-            border-left: 4px solid #007bff;
-            margin-bottom: 10px;
-            background-color: #f8f9fa;
+        .nav-tabs .nav-link.active {
+            font-weight: bold;
+            border-bottom: 3px solid #007bff;
         }
-        .chart-container {
-            position: relative;
-            height: 300px;
-            width: 100%;
-        }
-        .nav-pills .nav-link.active {
-            background-color: #007bff;
-        }
-        .nav-pills .nav-link {
-            color: #495057;
-        }
+        
+        /* Header banner styles */
         .header-banner {
             width: 100%;
             max-height: 120px;
@@ -63,209 +48,213 @@
             margin-bottom: 20px;
             border-bottom: 1px solid #dee2e6;
         }
+        
+        /* Progress bars */
+        .progress {
+            height: 25px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+        .progress-bar {
+            line-height: 25px;
+            font-weight: bold;
+        }
     </style>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <!-- Header Banner -->
     <div class="banner-container">
-        <img src="images/header-logos.png" alt="UKM, Watan Kita, Fakulti Sains & Teknologi, Statistics, Data Challenge" class="header-banner" onerror="this.onerror=null; this.src='https://i.imgur.com/JLhMU8B.png';">
+        <img src="https://i.ibb.co/Qj9VDNL/university-logos-banner.png" alt="UKM, Watan Kita, Fakulti Sains & Teknologi, Statistics, Data Challenge" class="header-banner">
     </div>
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="index.html">
-                <i class="bi bi-bar-chart-fill text-primary me-2"></i>
-                KAISEL
-            </a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary mb-4">
+        <div class="container">
+            <a class="navbar-brand text-white" href="index.html">KAISEL</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
+                        <a class="nav-link text-white" href="index.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="dashboard.html">Dashboard</a>
+                        <a class="nav-link text-white active" href="dashboard.html">Dashboard</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-    
+
     <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4 rounded shadow-sm">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="index.html">
-                    <i class="bi bi-bar-chart-fill text-primary me-2"></i>
-                    KAISEL
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.html">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="dashboard.html">Dashboard</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">KAISEL</a></li>
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+            </ol>
         </nav>
 
-        <div class="row mb-4">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header bg-primary text-white">
-                        <h5 class="mb-0">Detailed KAISEL Analysis Dashboard</h5>
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Detailed KAISEL Analysis Dashboard</h5>
+            </div>
+            <div class="card-body">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="mineral-tab" data-bs-toggle="tab" data-bs-target="#mineral" type="button" role="tab">Mineral Extraction</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="water-tab" data-bs-toggle="tab" data-bs-target="#water" type="button" role="tab">Water Quality</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="timber-tab" data-bs-toggle="tab" data-bs-target="#timber" type="button" role="tab">Timber Production</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="integrated-tab" data-bs-toggle="tab" data-bs-target="#integrated" type="button" role="tab">Integrated Analysis</button>
+                    </li>
+                </ul>
+                <div class="tab-content p-3" id="myTabContent">
+                    <div class="tab-pane fade show active" id="mineral" role="tabpanel">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h4>Mineral Extraction Trends</h4>
+                                <div class="chart-container" style="position: relative; height:300px; width:100%">
+                                    <img src="https://i.ibb.co/Jd8ZG1L/mineral-extraction.jpg" alt="Mineral Extraction Chart" style="width:100%; height:100%; object-fit:cover;">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <h4>Key Insights</h4>
+                                <div class="insight-item">
+                                    Iron ore extraction has increased by 15% in the past year, primarily in Pahang state.
+                                </div>
+                                <div class="insight-item">
+                                    Bauxite mining shows the highest growth rate at 22.3% across all mineral types.
+                                </div>
+                                <div class="problem-item">
+                                    Tin mining operations show concerning environmental impact in water catchment areas.
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <ul class="nav nav-pills mb-4" id="analysisTab" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="mineral-tab" data-bs-toggle="pill" data-bs-target="#mineral" type="button" role="tab">Mineral Extraction</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="water-tab" data-bs-toggle="pill" data-bs-target="#water" type="button" role="tab">Water Quality</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="timber-tab" data-bs-toggle="pill" data-bs-target="#timber" type="button" role="tab">Timber Production</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="integrated-tab" data-bs-toggle="pill" data-bs-target="#integrated" type="button" role="tab">Integrated Analysis</button>
-                            </li>
-                        </ul>
+                    <div class="tab-pane fade" id="water" role="tabpanel">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h4>Water Quality Indicators</h4>
+                                <div class="chart-container" style="position: relative; height:300px; width:100%">
+                                    <img src="https://i.ibb.co/0jXb9Lv/water-quality.jpg" alt="Water Quality Chart" style="width:100%; height:100%; object-fit:cover;">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <h4>Key Insights</h4>
+                                <div class="insight-item">
+                                    Average water pH level across all locations is 6.8.
+                                </div>
+                                <div class="insight-item">
+                                    Dissolved oxygen levels have improved by 8% in previously polluted areas.
+                                </div>
+                                <div class="problem-item">
+                                    Industrial runoff contributing to declining water quality in urban areas.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="timber" role="tabpanel">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h4>Timber Production Analysis</h4>
+                                <div class="chart-container" style="position: relative; height:300px; width:100%">
+                                    <img src="https://i.ibb.co/Lk3LBSJ/timber-production.jpg" alt="Timber Production Chart" style="width:100%; height:100%; object-fit:cover;">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <h4>Key Insights</h4>
+                                <div class="insight-item">
+                                    Sarawak is the highest timber producing region with 3,245,000 units.
+                                </div>
+                                <div class="insight-item">
+                                    Sustainable forestry practices have increased by 12% nationwide.
+                                </div>
+                                <div class="problem-item">
+                                    Deforestation rates exceed sustainable levels in 35% of logging areas.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="integrated" role="tabpanel">
+                        <h4>Environmental Analysis Capabilities</h4>
+                        <p>Our dashboard provides comprehensive analysis across multiple environmental domains</p>
                         
-                        <div class="tab-content" id="analysisTabContent">
-                            <!-- Mineral Extraction Tab -->
-                            <div class="tab-pane fade show active" id="mineral" role="tabpanel">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="card">
-                                            <div class="card-header bg-success text-white">
-                                                <h5 class="mb-0">Mineral Extraction Trends</h5>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="chart-container">
-                                                    <canvas id="mineralChart"></canvas>
-                                                </div>
+                        <div class="row mt-4">
+                            <div class="col-lg-4">
+                                <div class="card mb-4">
+                                    <div class="card-header bg-primary text-white">
+                                        <h5 class="mb-0">Mineral Resources</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="progress">
+                                            <div class="progress-bar bg-primary" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+                                                Extraction Analysis (85%)
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="card">
-                                            <div class="card-header bg-success text-white">
-                                                <h5 class="mb-0">Key Insights</h5>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-primary" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                                                Environmental Impact (75%)
                                             </div>
-                                            <div class="card-body">
-                                                <div id="mineralInsights"></div>
-                                                <h6 class="mt-4">Problems Identified</h6>
-                                                <div id="mineralProblems"></div>
+                                        </div>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-primary" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+                                                Regulatory Compliance (90%)
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             
-                            <!-- Water Quality Tab -->
-                            <div class="tab-pane fade" id="water" role="tabpanel">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="card">
-                                            <div class="card-header bg-info text-white">
-                                                <h5 class="mb-0">Water Quality Indicators</h5>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="chart-container">
-                                                    <canvas id="waterChart"></canvas>
-                                                </div>
+                            <div class="col-lg-4">
+                                <div class="card mb-4">
+                                    <div class="card-header bg-info text-white">
+                                        <h5 class="mb-0">Water Resources</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="progress">
+                                            <div class="progress-bar bg-info" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                                                Quality Assessment (80%)
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="card">
-                                            <div class="card-header bg-info text-white">
-                                                <h5 class="mb-0">Key Insights</h5>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-info" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+                                                Pollution Tracking (70%)
                                             </div>
-                                            <div class="card-body">
-                                                <div id="waterInsights"></div>
-                                                <h6 class="mt-4">Problems Identified</h6>
-                                                <div id="waterProblems"></div>
+                                        </div>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-info" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+                                                Watershed Analysis (85%)
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             
-                            <!-- Timber Production Tab -->
-                            <div class="tab-pane fade" id="timber" role="tabpanel">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="card">
-                                            <div class="card-header bg-warning text-dark">
-                                                <h5 class="mb-0">Timber Production by Region</h5>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="chart-container">
-                                                    <canvas id="timberChart"></canvas>
-                                                </div>
+                            <div class="col-lg-4">
+                                <div class="card mb-4">
+                                    <div class="card-header bg-success text-white">
+                                        <h5 class="mb-0">Forest Resources</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="progress">
+                                            <div class="progress-bar bg-success" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                                                Timber Production (75%)
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="card">
-                                            <div class="card-header bg-warning text-dark">
-                                                <h5 class="mb-0">Key Insights</h5>
-                                            </div>
-                                            <div class="card-body">
-                                                <div id="timberInsights"></div>
-                                                <h6 class="mt-4">Problems Identified</h6>
-                                                <div id="timberProblems"></div>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-success" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                                                Sustainability Metrics (80%)
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Integrated Analysis Tab -->
-                            <div class="tab-pane fade" id="integrated" role="tabpanel">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="card">
-                                            <div class="card-header bg-dark text-white">
-                                                <h5 class="mb-0">Integrated Environmental Impact</h5>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="chart-container">
-                                                    <canvas id="integratedChart"></canvas>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mt-4">
-                                    <div class="col-md-6">
-                                        <div class="card">
-                                            <div class="card-header bg-dark text-white">
-                                                <h5 class="mb-0">Systemic Issues</h5>
-                                            </div>
-                                            <div class="card-body">
-                                                <div id="systemicProblems"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="card">
-                                            <div class="card-header bg-dark text-white">
-                                                <h5 class="mb-0">Recommendations</h5>
-                                            </div>
-                                            <div class="card-body">
-                                                <div id="recommendations"></div>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-success" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">
+                                                Biodiversity Impact (65%)
                                             </div>
                                         </div>
                                     </div>
@@ -277,259 +266,12 @@
             </div>
         </div>
         
-        <!-- Footer section -->
-        <footer class="mt-5 text-center text-muted">
-            <p>© 2025 KAISEL Dashboard | Malaysia Sustainable Urban Development</p>
-            <p><small>Data updated: June 2023</small></p>
+        <footer class="mt-5 mb-3 text-center text-muted">
+            © 2024 KAISEL Dashboard | Malaysia Sustainable Urban Development<br>
+            Data updated: June 2023
         </footer>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
-    <script>
-        // Fetch dashboard data
-        fetch('dashboard.json')
-            .then(response => response.json())
-            .then(data => {
-                // Populate insights and problems
-                populateInsights('mineralInsights', data.mineral_extraction.insights);
-                populateProblems('mineralProblems', data.mineral_extraction.problems);
-                
-                populateInsights('waterInsights', data.water_quality.insights);
-                populateProblems('waterProblems', data.water_quality.problems);
-                
-                populateInsights('timberInsights', data.timber_production.insights);
-                populateProblems('timberProblems', data.timber_production.problems);
-                
-                populateProblems('systemicProblems', data.integrated.systemic_problems);
-                populateInsights('recommendations', data.integrated.recommendations);
-                
-                // Create charts
-                createMineralChart(data.charts.mineral);
-                createWaterChart(data.charts.water);
-                createTimberChart(data.charts.timber);
-                createIntegratedChart(data.charts.integrated);
-            })
-            .catch(error => console.error('Error loading dashboard data:', error));
-        
-        function populateInsights(containerId, insights) {
-            const container = document.getElementById(containerId);
-            insights.forEach(insight => {
-                const div = document.createElement('div');
-                div.className = 'insight-item';
-                div.textContent = insight;
-                container.appendChild(div);
-            });
-        }
-        
-        function populateProblems(containerId, problems) {
-            const container = document.getElementById(containerId);
-            problems.forEach(problem => {
-                const div = document.createElement('div');
-                div.className = 'problem-item';
-                div.textContent = problem;
-                container.appendChild(div);
-            });
-        }
-        
-        function createMineralChart(data) {
-            const ctx = document.getElementById('mineralChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: data.labels,
-                    datasets: [{
-                        label: 'Extraction Volume (tons)',
-                        data: data.values,
-                        backgroundColor: 'rgba(40, 167, 69, 0.6)',
-                        borderColor: 'rgba(40, 167, 69, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        }
-        
-        function createWaterChart(data) {
-            const ctx = document.getElementById('waterChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: data.labels,
-                    datasets: [{
-                        label: 'Water Quality Index',
-                        data: data.values,
-                        backgroundColor: 'rgba(23, 162, 184, 0.2)',
-                        borderColor: 'rgba(23, 162, 184, 1)',
-                        borderWidth: 2,
-                        tension: 0.1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false
-                }
-            });
-        }
-        
-        function createTimberChart(data) {
-            const ctx = document.getElementById('timberChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: data.labels,
-                    datasets: [{
-                        data: data.values,
-                        backgroundColor: [
-                            'rgba(255, 193, 7, 0.6)',
-                            'rgba(40, 167, 69, 0.6)',
-                            'rgba(23, 162, 184, 0.6)',
-                            'rgba(220, 53, 69, 0.6)',
-                            'rgba(111, 66, 193, 0.6)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 193, 7, 1)',
-                            'rgba(40, 167, 69, 1)',
-                            'rgba(23, 162, 184, 1)',
-                            'rgba(220, 53, 69, 1)',
-                            'rgba(111, 66, 193, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false
-                }
-            });
-        }
-        
-        function createIntegratedChart(data) {
-            const ctx = document.getElementById('integratedChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'radar',
-                data: {
-                    labels: data.labels,
-                    datasets: [{
-                        label: 'Current Status',
-                        data: data.current,
-                        backgroundColor: 'rgba(220, 53, 69, 0.2)',
-                        borderColor: 'rgba(220, 53, 69, 1)',
-                        borderWidth: 2
-                    }, {
-                        label: 'Target',
-                        data: data.target,
-                        backgroundColor: 'rgba(40, 167, 69, 0.2)',
-                        borderColor: 'rgba(40, 167, 69, 1)',
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        r: {
-                            beginAtZero: true,
-                            max: 100
-                        }
-                    }
-                }
-            });
-        }
-    </script>
 </body>
 </html>
-<!-- Skills Section -->
-<section id="skills" class="skills section-bg">
-    <div class="container" data-aos="fade-up">
-        <div class="section-title">
-            <h2>Environmental Analysis Capabilities</h2>
-            <p>Our dashboard provides comprehensive analysis across multiple environmental domains</p>
-        </div>
-
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="card mb-4">
-                    <div class="card-header bg-primary text-white">
-                        <h5 class="mb-0">Mineral Resources</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="progress mb-3">
-                            <div class="progress-bar" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
-                                <span>Extraction Analysis (85%)</span>
-                            </div>
-                        </div>
-                        <div class="progress mb-3">
-                            <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                                <span>Environmental Impact (75%)</span>
-                            </div>
-                        </div>
-                        <div class="progress mb-3">
-                            <div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
-                                <span>Regulatory Compliance (90%)</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-4">
-                <div class="card mb-4">
-                    <div class="card-header bg-info text-white">
-                        <h5 class="mb-0">Water Resources</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="progress mb-3">
-                            <div class="progress-bar bg-info" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
-                                <span>Quality Assessment (80%)</span>
-                            </div>
-                        </div>
-                        <div class="progress mb-3">
-                            <div class="progress-bar bg-info" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
-                                <span>Pollution Tracking (70%)</span>
-                            </div>
-                        </div>
-                        <div class="progress mb-3">
-                            <div class="progress-bar bg-info" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
-                                <span>Watershed Analysis (85%)</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-4">
-                <div class="card mb-4">
-                    <div class="card-header bg-success text-white">
-                        <h5 class="mb-0">Forest Resources</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="progress mb-3">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                                <span>Timber Production (75%)</span>
-                            </div>
-                        </div>
-                        <div class="progress mb-3">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
-                                <span>Sustainability Metrics (80%)</span>
-                            </div>
-                        </div>
-                        <div class="progress mb-3">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">
-                                <span>Biodiversity Impact (65%)</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
