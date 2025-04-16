@@ -1039,3 +1039,233 @@ section {
 .chart-info h3, .chart-info p, .chart-stats {
     transition: opacity 0.5s ease;
 }
+/* Dashboard Styles */
+.dashboard {
+    padding: 80px 0;
+    background-color: var(--light-background);
+}
+
+.dashboard-preview {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    margin-top: 40px;
+}
+
+.dashboard-tabs {
+    display: flex;
+    border-bottom: 1px solid #e5e7eb;
+    overflow-x: auto;
+    scrollbar-width: none; /* Firefox */
+}
+
+.dashboard-tabs::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Edge */
+}
+
+.tab-btn {
+    padding: 15px 20px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--light-text);
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.tab-btn:hover {
+    color: var(--primary-color);
+}
+
+.tab-btn.active {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.dashboard-content {
+    position: relative;
+    min-height: 400px;
+}
+
+.tab-content {
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+    position: absolute;
+    width: 100%;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    padding: 20px;
+}
+
+.tab-content.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    position: relative;
+}
+
+.transitioning-out {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.chart-container {
+    height: 300px;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.chart-info {
+    padding: 20px;
+}
+
+.chart-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: var(--dark-text);
+}
+
+.chart-info p {
+    color: var(--light-text);
+    margin-bottom: 20px;
+}
+
+.chart-stats {
+    list-style: none;
+    padding: 0;
+}
+
+.chart-stats li {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.stat {
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-right: 10px;
+}
+
+/* Detailed Charts Styles */
+.detailed-charts {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.detailed-charts .chart-container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    height: 400px;
+    position: relative;
+    margin-bottom: 20px;
+}
+/* Dashboard Styles (continued) */
+.detailed-charts .chart-container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    height: 400px;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.detailed-charts h3 {
+    text-align: center;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+.chart-description {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--light-text);
+    margin-top: 15px;
+    padding: 0 10px;
+}
+
+/* Loading Animation */
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(0, 0, 0, 0.1);
+    border-top: 5px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Fade-in Animation */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive adjustments for detailed charts */
+@media (min-width: 992px) {
+    .detailed-charts {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    }
+    
+    .detailed-charts .chart-container:first-child {
+        grid-column: 1 / -1;
+    }
+    
+    .chart-container {
+        height: 350px;
+    }
+}
+
+/* Mobile responsiveness for dashboard */
+@media (max-width: 768px) {
+    .dashboard-tabs {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+    }
+    
+    .tab-btn {
+        padding: 12px 15px;
+        font-size: 0.9rem;
+    }
+    
+    .chart-container {
+        height: 250px;
+    }
+    
+    .chart-info h3 {
+        font-size: 1.3rem;
+    }
+    
+    .detailed-charts .chart-container {
+        height: 300px;
+    }
+}
