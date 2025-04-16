@@ -955,3 +955,87 @@ section {
     margin-bottom: 20px;
     color: var(--primary-color);
 }
+
+/* Animation and Transition Styles */
+.tab-transition {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.tab-content {
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+    position: absolute;
+    width: 100%;
+}
+
+.tab-content.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    position: relative;
+}
+
+.transitioning-out {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid var(--light-background);
+    border-top: 5px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.section-highlight {
+    animation: highlight-pulse 1s ease;
+}
+
+@keyframes highlight-pulse {
+    0% { background-color: transparent; }
+    50% { background-color: rgba(37, 99, 235, 0.1); }
+    100% { background-color: transparent; }
+}
+
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.chart-info h3, .chart-info p, .chart-stats {
+    transition: opacity 0.5s ease;
+}
