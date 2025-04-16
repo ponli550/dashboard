@@ -3,125 +3,440 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KAISEL2 Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding-top: 20px;
-        }
-        .card {
-            margin-bottom: 20px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-        }
-        .insight-item {
-            padding: 10px;
-            border-left: 4px solid #28a745;
-            margin-bottom: 10px;
-            background-color: #f8f9fa;
-        }
-        .problem-item {
-            padding: 10px;
-            border-left: 4px solid #dc3545;
-            margin-bottom: 10px;
-            background-color: #f8f9fa;
-        }
-        .key-point-item {
-            padding: 10px;
-            border-left: 4px solid #007bff;
-            margin-bottom: 10px;
-            background-color: #f8f9fa;
-        }
-        .header-banner {
-            background-color: #f8f9fa;
-            padding: 20px 0;
-            margin-bottom: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        
-        /* New styles for enhanced features */
-        .stat-card {
-            text-align: center;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-        .stat-icon {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-        .stat-value {
-            font-size: 1.8rem;
-            font-weight: bold;
-        }
-        .stat-label {
-            font-size: 0.9rem;
-            color: #6c757d;
-        }
-    </style>
+    <title>Data Insights Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4 rounded shadow-sm">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="index.html">
-                    <i class="bi bi-bar-chart-fill text-primary me-2"></i>
-                    KAISEL
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="index.html">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="dashboard.html">Dashboard</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        
-        <div class="header-banner">
-            <h1 class="text-center mb-2">Malaysia Sustainable Urban Development Dashboard</h1>
-            <p class="text-center text-muted">Analyzing environmental data for sustainable development</p>
-        </div>
-        
-        <!-- Removed Key Statistics section -->
-        
-        <div class="row mb-4">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header bg-primary text-white">
-                        <h5 class="mb-0">Welcome to KAISEL Dashboard</h5>
-                    </div>
-                    <div class="card-body">
-                        <p>This dashboard provides analysis of environmental data related to sustainable urban development in Malaysia.</p>
-                        <p>Explore insights on mineral extraction, water quality, and timber production.</p>
-                        <a href="dashboard.html" class="btn btn-primary mt-2">
-                            <i class="bi bi-bar-chart-line me-2"></i>View Detailed Dashboard
-                        </a>
-                        <!-- Removed Key Insights section -->
-                    </div>
-                </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">DataInsights</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="#data">Data</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#team">Team</a></li>
+                <li><a href="#presentation">Presentations</a></li>
+                <li><a href="#contact" class="btn-primary">Contact Us</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
             </div>
         </div>
-        
-        <!-- Footer section -->
-        <footer class="mt-5 text-center text-muted">
-            <p>© 2025 KAISEL Dashboard | Malaysia Sustainable Urban Development</p>
-            <p><small>Data updated: June 2023</small></p>
-        </footer>
-    </div>
+    </nav>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Transform Your Data Into Actionable Insights</h1>
+                <p>Unlock the power of your data with our advanced analytics platform</p>
+                <div class="hero-buttons">
+                    <a href="#dashboard" class="btn-primary">Explore Dashboard</a>
+                    <a href="#about" class="btn-secondary">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://via.placeholder.com/600x400" alt="Data Visualization">
+            </div>
+        </div>
+    </section>
+
+    <!-- Home Section -->
+    <section id="home" class="home">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose Us</h2>
+                <p>We provide comprehensive data solutions for your business needs</p>
+            </div>
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Advanced Analytics</h3>
+                    <p>Powerful tools to analyze complex datasets and extract meaningful patterns</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h3>Interactive Dashboards</h3>
+                    <p>Customizable dashboards that provide real-time insights into your data</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3>Secure Platform</h3>
+                    <p>Enterprise-grade security to protect your sensitive information</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="dashboard">
+        <div class="container">
+            <div class="section-header">
+                <h2>Interactive Dashboard</h2>
+                <p>Visualize your data in meaningful ways</p>
+            </div>
+            <div class="dashboard-preview">
+                <div class="dashboard-tabs">
+                    <button class="tab-btn active" data-tab="pollution">Pollution Metrics</button>
+                    <button class="tab-btn" data-tab="trends">Yearly Trends</button>
+                    <button class="tab-btn" data-tab="comparison">Basin Comparison</button>
+                </div>
+                <div class="dashboard-content">
+                    <div class="tab-content active" id="pollution-content">
+                        <div class="chart-container">
+                            <canvas id="pollutionChart"></canvas>
+                        </div>
+                        <div class="chart-info">
+                            <h3>Water Quality Indicators</h3>
+                            <p>Track BOD5, NH3N, and SS levels across monitored basins</p>
+                            <ul class="chart-stats">
+                                <li><span class="stat">32.5%</span> Clean BOD5 levels in 2000</li>
+                                <li><span class="stat">86.1%</span> Clean BOD5 levels in 2021</li>
+                                <li><span class="stat">53.6%</span> Improvement over 21 years</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tab-content" id="trends-content">
+                        <!-- Trends content will be loaded via JavaScript -->
+                        <p>Loading trend data...</p>
+                    </div>
+                    <div class="tab-content" id="comparison-content">
+                        <!-- Comparison content will be loaded via JavaScript -->
+                        <p>Loading comparison data...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Section -->
+    <section id="data" class="data">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Data</h2>
+                <p>Explore our comprehensive water quality dataset</p>
+            </div>
+            <div class="data-overview">
+                <div class="data-metrics">
+                    <div class="metric-card">
+                        <h3>144</h3>
+                        <p>Basins Monitored</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>21</h3>
+                        <p>Years of Data</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>3</h3>
+                        <p>Quality Measures</p>
+                    </div>
+                </div>
+                <div class="data-table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Basins</th>
+                                <th>Measure</th>
+                                <th>Status</th>
+                                <th>Proportion (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1/1/21</td>
+                                <td>144</td>
+                                <td>BOD5</td>
+                                <td>Clean</td>
+                                <td>86.11</td>
+                            </tr>
+                            <tr>
+                                <td>1/1/21</td>
+                                <td>144</td>
+                                <td>NH3N</td>
+                                <td>Clean</td>
+                                <td>40.28</td>
+                            </tr>
+                            <tr>
+                                <td>1/1/21</td>
+                                <td>144</td>
+                                <td>SS</td>
+                                <td>Clean</td>
+                                <td>88.19</td>
+                            </tr>
+                            <tr>
+                                <td>1/1/20</td>
+                                <td>144</td>
+                                <td>BOD5</td>
+                                <td>Clean</td>
+                                <td>57.64</td>
+                            </tr>
+                            <tr>
+                                <td>1/1/20</td>
+                                <td>144</td>
+                                <td>NH3N</td>
+                                <td>Clean</td>
+                                <td>19.44</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="#" class="btn-secondary">View Full Dataset</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2>About Our Mission</h2>
+                <p>Dedicated to environmental data transparency</p>
+            </div>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="https://via.placeholder.com/500x400" alt="Our Mission">
+                </div>
+                <div class="about-text">
+                    <h3>Monitoring Water Quality Since 2000</h3>
+                    <p>Our organization has been at the forefront of water quality monitoring for over two decades. We've expanded from 120 basins in 2000 to 144 basins in 2021, providing comprehensive coverage of critical waterways.</p>
+                    <p>Through rigorous data collection and analysis, we've helped identify pollution trends and supported environmental policy decisions that have led to significant improvements in water quality indicators.</p>
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <h4>53.6%</h4>
+                            <p>Improvement in Clean BOD5 Levels</p>
+                        </div>
+                        <div class="stat-item">
+                            <h4>20+</h4>
+                            <p>Years of Continuous Monitoring</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="team">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Expert Team</h2>
+                <p>Meet the specialists behind our data insights</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://via.placeholder.com/300x300" alt="Team Member">
+                    </div>
+                    <h3>Dr. Sarah Johnson</h3>
+                    <p class="member-role">Lead Data Scientist</p>
+                    <p class="member-bio">Specializes in water quality analysis with 15+ years of experience in environmental data modeling.</p>
+                    <div class="member-social">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://via.placeholder.com/300x300" alt="Team Member">
+                    </div>
+                    <h3>Michael Chen</h3>
+                    <p class="member-role">Environmental Engineer</p>
+                    <p class="member-bio">Expert in basin monitoring systems and field data collection methodologies.</p>
+                    <div class="member-social">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://via.placeholder.com/300x300" alt="Team Member">
+                    </div>
+                    <h3>Dr. Emily Rodriguez</h3>
+                    <p class="member-role">Research Director</p>
+                    <p class="member-bio">Leads our research initiatives and collaborations with environmental agencies.</p>
+                    <div class="member-social">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://via.placeholder.com/300x300" alt="Team Member">
+                    </div>
+                    <h3>James Wilson</h3>
+                    <p class="member-role">Data Visualization Specialist</p>
+                    <p class="member-bio">Creates intuitive visualizations that make complex data accessible to all stakeholders.</p>
+                    <div class="member-social">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Presentation Section -->
+    <section id="presentation" class="presentation">
+        <div class="container">
+            <div class="section-header">
+                <h2>Research & Presentations</h2>
+                <p>Explore our latest findings and reports</p>
+            </div>
+            <div class="presentation-grid">
+                <div class="presentation-card">
+                    <div class="presentation-image">
+                        <img src="https://via.placeholder.com/400x250" alt="Presentation">
+                    </div>
+                    <div class="presentation-content">
+                        <h3>2021 Water Quality Report</h3>
+                        <p>Comprehensive analysis of water quality trends across all monitored basins.</p>
+                        <a href="#" class="btn-text">Download PDF <i class="fas fa-download"></i></a>
+                    </div>
+                </div>
+                <div class="presentation-card">
+                    <div class="presentation-image">
+                        <img src="https://via.placeholder.com/400x250" alt="Presentation">
+                    </div>
+                    <div class="presentation-content">
+                        <h3>Impact of Industrial Regulations</h3>
+                        <p>Research on how regulatory changes have affected pollution levels since 2010.</p>
+                        <a href="#" class="btn-text">View Presentation <i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+                <div class="presentation-card">
+                    <div class="presentation-image">
+                        <img src="https://via.placeholder.com/400x250" alt="Presentation">
+                    </div>
+                    <div class="presentation-content">
+                        <h3>Two Decades of Monitoring</h3>
+                        <p>Historical perspective on changes in water quality from 2000 to 2021.</p>
+                        <a href="#" class="btn-text">Watch Webinar <i class="fas fa-play-circle"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Get In Touch</h2>
+                <p>Have questions about our data or services?</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">Send Message</button>
+                    </form>
+                </div>
+                <div class="contact-info">
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h3>Address</h3>
+                            <p>123 Environmental Way, Research Park, CA 94103</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h3>Email</h3>
+                            <p>info@datainsights.com</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h3>Phone</h3>
+                            <p>+1 (555) 123-4567</p>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>DataInsights</h3>
+                    <p>Transforming environmental data into actionable insights</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="#home">Home</a></li>
+                            <li><a href="#dashboard">Dashboard</a></li>
+                            <li><a href="#data">Data</a></li>
+                            <li><a href="#about">About</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="#">Research Papers</a></li>
+                            <li><a href="#">Data API</a></li>
+                            <li><a href="#">Methodology</a></li>
+                            <li><a href="#">FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <ul>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms of Service</a></li>
+                            <li><a href="#">Data Usage Policy</a></li>
+                            <li><a href="#">Cookies</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 DataInsights. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
