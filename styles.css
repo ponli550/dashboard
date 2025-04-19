@@ -868,7 +868,9 @@ section {
     .feature-card, .team-member, .presentation-card {
         max-width: 100%;
     }
+
 }
+
 
 /* Data Analysis Styles */
 .data-analysis {
