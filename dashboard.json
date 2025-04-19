@@ -1,0 +1,99 @@
+{
+  "mineral_extraction": {
+    "insights": [
+      "Iron ore extraction has increased by 15% in the past year, primarily in Pahang state.",
+      "Bauxite mining shows the highest growth rate at 22.3% across all mineral types.",
+      "Metallic minerals dominate production at 68.5% of total volume.",
+      "Sustainable mining practices have been implemented in 42% of active sites."
+    ],
+    "problems": [
+      "Tin mining operations show concerning environmental impact in water catchment areas.",
+      "Regulatory compliance issues identified in 23% of small-scale mining operations.",
+      "Increasing extraction rates may not be sustainable in key regions.",
+      "Land rehabilitation efforts lag behind extraction activities by approximately 35%."
+    ],
+    "key_points": [
+      "Need for improved environmental monitoring around extraction sites.",
+      "Opportunity for sustainable mining practices in developing regions.",
+      "Importance of balancing economic benefits with environmental protection."
+    ]
+  },
+  "water_quality": {
+    "insights": [
+      "Average water pH level across all locations is 6.8.",
+      "Klang River basin has the most samples with pH below recommended levels.",
+      "Johor shows elevated contaminant levels that require attention.",
+      "Water quality has improved by 12% in areas with active remediation programs."
+    ],
+    "problems": [
+      "Industrial runoff contributing to declining water quality in urban areas.",
+      "Heavy metal contamination detected in 18% of samples near mining operations.",
+      "Inadequate wastewater treatment infrastructure in rapidly developing regions.",
+      "Agricultural runoff causing nutrient loading in several river systems."
+    ],
+    "key_points": [
+      "Critical need for improved water treatment facilities in urban centers.",
+      "Importance of buffer zones between industrial areas and water sources.",
+      "Potential for green infrastructure to mitigate urban runoff issues."
+    ]
+  },
+  "timber_production": {
+    "insights": [
+      "Sarawak is the highest timber producing region with 3,245,000 units.",
+      "Kelantan has the lowest sustainability index at 3.45.",
+      "Sabah has the highest timber species diversity with 28 different species.",
+      "Certified sustainable forestry practices have increased by 18% since 2020."
+    ],
+    "problems": [
+      "Deforestation rates exceed sustainable levels in 35% of logging areas.",
+      "Illegal logging remains a significant challenge in remote regions.",
+      "Replanting efforts lag behind harvesting rates in key timber-producing states.",
+      "Biodiversity loss in high-intensity logging areas is concerning."
+    ],
+    "key_points": [
+      "Need for stronger enforcement of sustainable forestry practices.",
+      "Importance of indigenous community involvement in forest management.",
+      "Potential for eco-tourism as an alternative economic driver."
+    ]
+  },
+  "integrated": {
+    "integrated_insights": [
+      "Strong correlation between mining activities and downstream water quality degradation.",
+      "Regions with sustainable timber practices show better overall environmental health metrics.",
+      "Urban development pressure is creating competing demands for water resources and land use."
+    ],
+    "systemic_problems": [
+      "Lack of integrated planning across resource management sectors.",
+      "Economic development priorities often override environmental protection measures.",
+      "Insufficient data sharing between agencies hampers coordinated response.",
+      "Climate change impacts are exacerbating existing environmental challenges.",
+      "Regulatory frameworks are not keeping pace with industrial development."
+    ],
+    "recommendations": [
+      "Implement integrated watershed management approaches across all resource sectors.",
+      "Develop cross-sector sustainability metrics and reporting requirements.",
+      "Increase community involvement in environmental monitoring and decision-making.",
+      "Establish stronger regulatory frameworks with meaningful enforcement mechanisms.",
+      "Invest in green technology and sustainable infrastructure development."
+    ]
+  },
+  "charts": {
+    "mineral": {
+      "labels": ["Iron", "Bauxite", "Tin", "Gold", "Copper"],
+      "values": [4500, 3200, 2100, 1800, 2700]
+    },
+    "water": {
+      "labels": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      "values": [72, 68, 65, 70, 75, 78, 76, 74, 72, 70, 73, 75]
+    },
+    "timber": {
+      "labels": ["Sarawak", "Sabah", "Pahang", "Kelantan", "Others"],
+      "values": [45, 25, 15, 10, 5]
+    },
+    "integrated": {
+      "labels": ["Water Quality", "Forest Cover", "Biodiversity", "Air Quality", "Soil Health", "Waste Management"],
+      "current": [65, 48, 52, 70, 55, 60],
+      "target": [85, 75, 80, 90, 75, 85]
+    }
+  }
+}
